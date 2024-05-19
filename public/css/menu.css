@@ -1,0 +1,66 @@
+/* Estilo para toda la página */
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Versión móvil */
+:root {
+    font-size: 30px;
+    font-family: 'museo'; 
+    background-color: #121317;
+}
+
+body {
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+    text-align: justify;
+    background-color: transparent;
+}
+
+/* Estilo para las secciones */
+section {
+    width: 80%; /* Ancho de la sección principal */
+    margin: 50px auto; /* Centrar la sección */
+    background-color: rgba(255, 255, 255, 0.8); /* Color de fondo con transparencia */
+    padding: 20px;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+/* Estilo para la primera sección */
+section:nth-of-type(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilo para el título */
+h2 {
+    text-align: left;
+}
+
+/* Estilo para los botones */
+button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilo para la segunda sección */
+section:nth-of-type(2) {
+    width: 100%; /* Ocupa todo el ancho */
+    margin-top: 50px; /* Espacio entre secciones */
+}
+
+/* Estilo para las imágenes del carrusel */
+.carousel-item img {
+    border-radius: 10px; /* Bordes redondeados */
+}
