@@ -10,10 +10,10 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+    <link rel="icon" type="image/x-icon" src="{{ asset('.\favicon.ico') }}">
+    <link rel="stylesheet" src="{{ asset('.\css/layout.css') }}">
     
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'public/css/menu.css',  'public/css/layout.css',  'public/css/panel.css'])
 </head>
 <body>
     <div id="app" class="d-flex flex-column min-vh-100">

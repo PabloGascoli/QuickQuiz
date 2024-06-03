@@ -3,7 +3,7 @@
 @section('title', 'Página de Inicio')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+<link rel="stylesheet" src="{{ asset('css/menu.css') }}">
 
 <section class="image-text-section">
     <div class="image-wrapper">

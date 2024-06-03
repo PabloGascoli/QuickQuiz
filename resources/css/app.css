@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+:root {
+    font-size: 30px;
+    font-family: 'museo'; 
+    background-color: #121317;
+}
+
+body {
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+    text-align: justify;
+    background-color: transparent;
+}
+
+section {
+    width: 80%; 
+    margin: 50px auto; 
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 20px;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    text-align: left;
+}
+
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff; 
+    color: #fff; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.carousel-item img {
+    border-radius: 10px; 
+}
+a{
+    text-decoration: none;
+    color: black;
+
+}
+a:hover{
+    color: rgb(35, 68, 158);
+    text-decoration: none;
+}
+.image-text-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.image-wrapper img {
+    max-width: 100%;
+    height: auto;
+}
+
+.image-text-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.image-wrapper {
+    flex: 1;
+    min-width: 200px;
+}
+
+.text-wrapper {
+    flex: 2;
+    padding-left: 20px;
+}
+.custom-carousel-control-prev,
+.custom-carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+.custom-carousel-control-prev:hover,
+.custom-carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+
+.custom-carousel-icon {
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    filter: invert(100%); 
+}
+footer p, footer ul {
+    font-size: 14px; 
+}
+
+
+
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    
+    }
+    .image-text-section {
+        display: block;
+        background-color: transparent;
+        text-align: center;
+    }
+    
+    .text-wrapper p {
+        display: none;
+    }
+
+    .image-wrapper {
+        display: block;
+        width: 100%;
+    }
+
+    .image-wrapper img {
+        width: 80%;
+        height: auto;
+    }
+
+    .image-text-section {
+        padding: 0;
+    }
+}
+
