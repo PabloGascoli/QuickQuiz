@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;  // Asegúrate de usar el espacio de nombres correcto para el modelo User
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-   // Otros métodos...
-
     /**
      * Maneja una solicitud de registro para la aplicación.
      *
@@ -28,12 +28,13 @@ class RegisterController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        // Si deseas manejar la verificación de correo electrónico, debes agregar el campo 'email_verified_at' aquí.
-        // $user->email_verified_at = now();
         $user->save();
 
         event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+        // Cierra la sesión del usuario después del registro para que tenga que iniciar sesión nuevamente
+        Auth::logout();
+
+        return redirect('/login')->with('status', 'Registration successful. Please log in.');
     }
 }

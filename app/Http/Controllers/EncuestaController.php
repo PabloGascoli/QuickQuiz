@@ -4,72 +4,92 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Encuesta;
+use App\Models\Genero;
 
 class EncuestaController extends Controller
 {
-    // Método para mostrar todas las encuestas
-    
     public function index()
     {
-        $encuestas = Encuesta::all();
-        return view('panel', ['encuestas' => $encuestas]);
+        $encuestas = Encuesta::with('generoRelacion')->get();
+        return view('panel', compact('encuestas'));
+    }
+    public function showMenu()
+    {
+        $generos = Genero::all();
+        $encuestas = Encuesta::with('generoRelacion')->get();
+        return view('menu', compact('encuestas', 'generos'));
     }
 
-    // Método para mostrar el formulario de creación de encuestas
     public function create()
     {
-        return view('encuestas.create');
+        $generos = Genero::all();
+        return view('encuestas.create', compact('generos'));
     }
 
-    // Método para guardar una nueva encuesta
     public function store(Request $request)
     {
-        // Valida los datos de la solicitud
         $request->validate([
-            'nombre' => 'required',
-            'genero' => 'required',
-            'descripcion' => 'required',
-            // Añade las reglas de validación para otros campos aquí
+            'nombre' => 'required|string|max:255',
+            'genero' => 'required|exists:generos,id',
+            'descripcion' => 'required|string',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // Crea una nueva instancia de Encuesta con los datos recibidos
-        Encuesta::create($request->all());
+        $imageName = time() . '.' . $request->imagen->extension();  
+        $request->imagen->move(public_path('images'), $imageName);
 
-        // Redirige de vuelta a la página de gestión de encuestas
-        return redirect()->route('encuestas.index');
+        Encuesta::create([
+            'nombre' => $request->nombre,
+            'genero' => $request->genero,
+            'descripcion' => $request->descripcion,
+            'imagen' => $imageName,
+        ]);
+
+        return redirect()->route('encuestas.index')->with('success', 'Encuesta creada exitosamente');
     }
 
-    // Método para mostrar el formulario de edición de encuestas
     public function edit(Encuesta $encuesta)
     {
-        return view('encuestas.edit', compact('encuesta'));
+        $generos = Genero::all();
+        $preguntas = $encuesta->preguntas;
+
+        return view('encuestas.edit', compact('encuesta', 'generos', 'preguntas'));
     }
 
-    // Método para actualizar una encuesta existente
     public function update(Request $request, Encuesta $encuesta)
-    {
-        // Valida los datos de la solicitud
-        $request->validate([
-            'nombre' => 'required',
-            'genero' => 'required',
-            'descripcion' => 'required',
-            // Añade las reglas de validación para otros campos aquí
-        ]);
+{
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'genero' => 'required|exists:generos,id',
+        'descripcion' => 'required|string',
+        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+    ]);
 
-        // Actualiza la encuesta con los datos recibidos
-        $encuesta->update($request->all());
+    $data = $request->only(['nombre', 'genero', 'descripcion']);
 
-        // Redirige de vuelta a la página de gestión de encuestas
-        return redirect()->route('encuestas.index');
+    if ($request->hasFile('imagen')) {
+        $imageName = time() . '.' . $request->imagen->extension();
+        $request->imagen->move(public_path('images'), $imageName);
+        $data['imagen'] = $imageName;
     }
 
-    // Método para eliminar una encuesta
+    $encuesta->update($data);
+
+    return redirect()->route('encuestas.index')->with('success', 'Encuesta actualizada exitosamente');
+}
+
+
     public function destroy(Encuesta $encuesta)
     {
-        // Elimina la encuesta
         $encuesta->delete();
-
-        // Redirige de vuelta a la página de gestión de encuestas
         return redirect()->route('encuestas.index');
+    }
+    
+    public function estadisticas($id_encuesta)
+    {
+        $encuesta = Encuesta::findOrFail($id_encuesta);
+        $preguntas = $encuesta->preguntas;
+
+        return view('encuestas.estadisticas', compact('encuesta', 'preguntas'));
     }
 }

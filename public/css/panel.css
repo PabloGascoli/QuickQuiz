@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+:root {
+    font-size: 20px;
+    font-family: 'museo'; 
+    background-color: #121317;
+}
+
+body {
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+    text-align: justify;
+    background-color: transparent;
+}
+.container{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+}

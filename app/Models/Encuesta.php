@@ -13,6 +13,11 @@ class Encuesta extends Model
 
     public function preguntas()
     {
-        return $this->hasMany(Pregunta::class, 'id_encuesta');
+        return $this->hasMany(Pregunta::class, 'id_encuesta', 'id_encuesta');
+    }
+
+    public function generoRelacion()
+    {
+        return $this->belongsTo(Genero::class, 'genero');
     }
 }

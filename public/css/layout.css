@@ -1,0 +1,30 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+nav{
+    margin-top: 0;
+}
+
+footer {
+    font-size: 0.8rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+footer .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+footer .container p, footer .container ul {
+    margin-bottom: 0;
+}
